@@ -1,0 +1,20 @@
+### //login
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "tester01",
+  "password": "GteteqbQQgSr88SwNExUQv2ydb7xuf8c"
+}
+
+### 1. Create new client
+POST http://localhost:3000/api/client/new
+Content-Type: application/json
+X-user-auth: {"username":"tester01","token":"c959cbec6f69ecfcc23d07c1f9c898e7"}
+
+{
+   "name": "Jenny Svensson",
+  "email": "jenny.svensson@example.com",
+  "telephone": "0738836820"
+}
+
