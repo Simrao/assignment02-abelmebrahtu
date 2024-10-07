@@ -97,4 +97,15 @@ test('TC 02 - Get all clients', async () => {
     const bill = await response.json();
     expect(bill.id).toBe(billId);
   });
+
+// 6. Get Client with ID
+test('TC 06 - Get client with ID', async () => {
+    const clientId = 1;
+    const response = await request.get(`/api/client/${clientId}`, {
+      headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
+    });
+    expect(response.ok()).toBeTruthy();
+    const client = await response.json();
+    expect(client.id).toBe(clientId);
+  });
 });
