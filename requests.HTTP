@@ -54,3 +54,9 @@ X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
 GET http://localhost:3000/api/rooms
 Content-Type: application/json
 X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
+
+### 8. Get Room by ID
+GET http://localhost:3000/api/room/1
+Content-Type: application/json
+X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
+

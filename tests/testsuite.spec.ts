@@ -123,5 +123,16 @@ test('TC 07 - Hitta alla rum', async () => {
     const rooms = await response.json();
     expect(rooms.length).toBeGreaterThan(0);
   });
-})
 
+// 8. Get room with ID
+test('TC 08 - Get room with ID', async () => {
+    const roomId = 1;
+    const response = await request.get(`/api/room/${roomId}`, {
+        headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
+    });
+    expect(response.ok()).toBeTruthy();
+    
+    const room = await response.json();
+    expect(room.id).toBe(roomId);
+  });
+})
