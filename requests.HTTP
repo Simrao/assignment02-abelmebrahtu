@@ -18,3 +18,10 @@ X-user-auth: {"username":"tester01","token":"c959cbec6f69ecfcc23d07c1f9c898e7"}
   "telephone": "0738836820"
 }
 
+### 2. Get All Clients
+GET http://localhost:3000/api/clients
+Content-Type: application/json
+X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
+
+###
+

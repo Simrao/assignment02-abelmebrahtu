@@ -1,14 +1,15 @@
 import { test, expect, APIRequestContext } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
-const BASE_URL = 'http://localhost:3000';
+
+const BASE_URL = 'http://localhost:3000/';
 
 test.describe('TheTester Hotel API Tests', () => {
   let request: APIRequestContext;
   let token: string;
 
   test.beforeAll(async ({ playwright }) => {
-    request = await playwright.request.newContext({
+      request = await playwright.request.newContext({
       baseURL: BASE_URL,
     });
 
@@ -22,6 +23,7 @@ test.describe('TheTester Hotel API Tests', () => {
     });
     const loginData = await loginResponse.json();
     token = loginData.token;
+    expect(token).toBeDefined();
   });
 
     // 1. Create new client
@@ -42,4 +44,16 @@ test.describe('TheTester Hotel API Tests', () => {
         expect(client.name).toBe(payload.name);
         expect(client.email).toBe(payload.email);
       });
+    
+
+    // 2. Get all clients
+    test('TC 02 - Hitta alla kunder', async () => {
+    const response = await request.get('/api/clients', {
+      headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
     });
+    expect(response.ok()).toBeTruthy();
+    expect(response.status()).toBe(200);
+    const clients = await response.json();
+    expect(clients.length).toBeGreaterThan(0);
+  });
+});
