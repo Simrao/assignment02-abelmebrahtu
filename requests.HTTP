@@ -34,3 +34,9 @@ X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
   "email": "alvin.@example.jansoncom",
   "telephone": "0734905331"
 }
+
+### 4. Get All Bills
+GET http://localhost:3000/api/bills
+Content-Type: application/json
+X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
+

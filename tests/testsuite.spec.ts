@@ -76,4 +76,15 @@ test.describe('TheTester Hotel API Tests', () => {
     const updatedClient = await response.json();
     expect(updatedClient.name).toBe(payload.name);
   });
+
+ // 4. Get all bills
+ test('TC 04 - Get all bills', async () => {
+    const response = await request.get('/api/bills', {
+      headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
+    });
+    expect(response.ok()).toBeTruthy();
+    expect(response.status()).toBe(200);
+    const bills = await response.json();
+    expect(bills.length).toBeGreaterThan(0);
+  });
 });
