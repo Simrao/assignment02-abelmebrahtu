@@ -31,6 +31,8 @@ test('TC 01 - Create new client ', async () => {
         const payload = {
           name: faker.person.fullName(),
           email: faker.internet.email(),
+          telephone:faker.phone.number({ style: 'international' }),
+
         };
         const response = await request.post('/api/client/new', {
           data: JSON.stringify(payload),
@@ -61,8 +63,10 @@ test('TC 02 - Get all clients', async () => {
  test('TC 03 - Update client', async () => {
     const clientId = 2;
     const payload = {
+        id: 2,
       name: 'Mikael Eriksson',
       email: 'mikael.eriksson@example.com',
+      telephone: '0734467902'
     };
     const response = await request.put(`/api/client/${clientId}`, {
       data: JSON.stringify(payload),
@@ -108,4 +112,16 @@ test('TC 06 - Get client with ID', async () => {
     const client = await response.json();
     expect(client.id).toBe(clientId);
   });
-});
+
+// 7. Find all rooms
+test('TC 07 - Hitta alla rum', async () => {
+    const response = await request.get('/api/rooms', {
+      headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
+    });
+    expect(response.ok()).toBeTruthy();
+    expect(response.status()).toBe(200);
+    const rooms = await response.json();
+    expect(rooms.length).toBeGreaterThan(0);
+  });
+})
+
