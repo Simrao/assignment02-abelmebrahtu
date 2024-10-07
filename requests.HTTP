@@ -25,7 +25,7 @@ X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
 
 
 ### 3. Update Client
-PUT http://localhost:3000/api/client/1
+PUT http://localhost:3000/api/client/2
 Content-Type: application/json
 X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
 
@@ -39,4 +39,10 @@ X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
 GET http://localhost:3000/api/bills
 Content-Type: application/json
 X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
+
+### 5. Get Bill by ID
+GET http://localhost:3000/api/bill/1
+Content-Type: application/json
+X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
+
 

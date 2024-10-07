@@ -26,8 +26,8 @@ test.describe('TheTester Hotel API Tests', () => {
     expect(token).toBeDefined();
   });
 
-    // 1. Create new client
-    test('TC 01 - Create new client ', async () => {
+// 1. Create new client
+test('TC 01 - Create new client ', async () => {
         const payload = {
           name: faker.person.fullName(),
           email: faker.internet.email(),
@@ -46,8 +46,8 @@ test.describe('TheTester Hotel API Tests', () => {
       });
     
 
-    // 2. Get all clients
-    test('TC 02 - Get all clients', async () => {
+// 2. Get all clients
+test('TC 02 - Get all clients', async () => {
     const response = await request.get('/api/clients', {
       headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
     });
@@ -57,11 +57,10 @@ test.describe('TheTester Hotel API Tests', () => {
     expect(clients.length).toBeGreaterThan(0);
   });
 
-    // 3. Update client
-    test('TC 03 - Update client', async () => {
+// 3. Update client
+ test('TC 03 - Update client', async () => {
     const clientId = 2;
     const payload = {
-      id: '2',
       name: 'Mikael Eriksson',
       email: 'mikael.eriksson@example.com',
     };
@@ -86,5 +85,16 @@ test.describe('TheTester Hotel API Tests', () => {
     expect(response.status()).toBe(200);
     const bills = await response.json();
     expect(bills.length).toBeGreaterThan(0);
+  });
+
+ // 5. Get bill with ID
+ test('TC 05 - Get bill with ID', async () => {
+    const billId = 1;
+    const response = await request.get(`/api/bill/${billId}`, {
+      headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
+    });
+    expect(response.ok()).toBeTruthy();
+    const bill = await response.json();
+    expect(bill.id).toBe(billId);
   });
 });
