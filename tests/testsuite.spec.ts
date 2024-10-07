@@ -47,7 +47,7 @@ test.describe('TheTester Hotel API Tests', () => {
     
 
     // 2. Get all clients
-    test('TC 02 - Hitta alla kunder', async () => {
+    test('TC 02 - Get all clients', async () => {
     const response = await request.get('/api/clients', {
       headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
     });
@@ -55,5 +55,25 @@ test.describe('TheTester Hotel API Tests', () => {
     expect(response.status()).toBe(200);
     const clients = await response.json();
     expect(clients.length).toBeGreaterThan(0);
+  });
+
+    // 3. Update client
+    test('TC 03 - Update client', async () => {
+    const clientId = 2;
+    const payload = {
+      id: '2',
+      name: 'Mikael Eriksson',
+      email: 'mikael.eriksson@example.com',
+    };
+    const response = await request.put(`/api/client/${clientId}`, {
+      data: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-user-auth': JSON.stringify({ username: 'tester01', token }),
+      },
+    });
+    expect(response.ok()).toBeTruthy();
+    const updatedClient = await response.json();
+    expect(updatedClient.name).toBe(payload.name);
   });
 });
