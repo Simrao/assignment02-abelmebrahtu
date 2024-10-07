@@ -60,3 +60,15 @@ GET http://localhost:3000/api/room/1
 Content-Type: application/json
 X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
 
+### 9. Update Reservation
+PUT http://localhost:3000/api/reservation/1
+Content-Type: application/json
+X-user-auth: {"username":"tester01","token":"2bd896d8811d8105ec1bd8d998906284"}
+
+{
+  "start": "2024-10-16",
+  "end": "2024-10-22",
+  "client": "Jonas Hellman",
+  "room": "Floor 2, Room 201",
+  "bill": "ID: 1"
+}

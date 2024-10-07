@@ -23,6 +23,7 @@ test.describe('TheTester Hotel API Tests', () => {
     });
     const loginData = await loginResponse.json();
     token = loginData.token;
+    console.log(token); 
     expect(token).toBeDefined();
   });
 
@@ -114,7 +115,7 @@ test('TC 06 - Get client with ID', async () => {
   });
 
 // 7. Find all rooms
-test('TC 07 - Hitta alla rum', async () => {
+test('TC 07 - Find all rooms', async () => {
     const response = await request.get('/api/rooms', {
       headers: { 'X-user-auth': JSON.stringify({ username: 'tester01', token }) },
     });
@@ -134,5 +135,33 @@ test('TC 08 - Get room with ID', async () => {
     
     const room = await response.json();
     expect(room.id).toBe(roomId);
+  });
+
+// 9. Update reservation
+test('TC 09 - Update reservation', async () => {
+    const reservationId = 1;
+    const payload = {
+      start: '2024-10-16',
+      end: '2024-10-22',
+      client: 'Jonas Hellman',
+      room: 'Floor 2, Room 201',
+      bill: 'ID: 1',
+    };
+
+    const response = await request.put(`/api/reservation/${reservationId}`, {
+      data: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-user-auth': JSON.stringify({ username: 'tester01', token }),
+      },
+    });
+    expect(response.ok()).toBeTruthy();
+
+    const updatedReservation = await response.json();
+    expect(updatedReservation.start).toBe(payload.start);
+    expect(updatedReservation.end).toBe(payload.end);
+    expect(updatedReservation.client).toBe(payload.client);
+    expect(updatedReservation.room).toBe(payload.room);
+    expect(updatedReservation.bill).toBe(payload.bill);
   });
 })
